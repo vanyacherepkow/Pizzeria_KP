@@ -1,0 +1,3 @@
+Напиток. select top 1 nazv_napitka from zakaz_na_dost inner join tov_check_za_dost  on tov_check_na_dost_id=id_tov_check_za_dost inner join napitok on id_napitok=napitok_v_dost_id  order by id_zakaz_na_dost desc
+Еда. select top 1 naim_blud from zakaz_na_dost inner join tov_check_za_dost  on tov_check_na_dost_id=id_tov_check_za_dost inner join eda on id_eda=eda_v_dost_id  order by id_zakaz_na_dost desc
+Пицца. select top 1 Nazv_pizza from zakaz_na_dost inner join tov_check_za_dost  on tov_check_na_dost_id=id_tov_check_za_dost inner join pizza on id_pizza=pizza_v_dost_id  order by id_zakaz_na_dost desc   

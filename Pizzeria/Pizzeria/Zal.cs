@@ -26,7 +26,7 @@ namespace Pizzeria
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Close();
             Main_Menu Form = new Main_Menu();
             Form.Show();
         }
@@ -88,30 +88,38 @@ namespace Pizzeria
             switch (eda_vibor)
             {
                 case (3):
-                    _Proc.zakaz_v_zale_form_eda_add(Convert.ToInt32(dataGridView1.CurrentRow.Cells[0].Value.ToString()), Convert.ToInt32(numericUpDown1.Value.ToString()), Program.CenaVZale * Convert.ToInt32(numericUpDown1.Value.ToString()), Program.Num_Check);
+                    _Proc.zakaz_v_zale_form_eda_add(Convert.ToInt32(dataGridView1.CurrentRow.Cells[0].Value.ToString()), Convert.ToInt32(numericUpDown1.Value.ToString()), Program.CenaVZale * Convert.ToInt32(numericUpDown1.Value.ToString()), Program.Num_Check_v_zale);
                     textBox1.Text = "";
                     Program.CenaVZale = 0;
-                    string Eda_Check = (dataGridView1.CurrentRow.Cells[1].Value.ToString() + " " + dataGridView1.CurrentRow.Cells[2].Value.ToString()).ToString();
-                    listBox1.Items.Add(Eda_Check.ToString());
+                    _Viv.Eda_zal_lb();
+                    //string Eda_Check = (dataGridView1.CurrentRow.Cells[1].Value.ToString() + " " + dataGridView1.CurrentRow.Cells[2].Value.ToString()).ToString();
+                    listBox1.Items.Add(Program.VivodEdaNADostLB.ToString());
                     break;
                 case (2):
-                    _Proc.zakaz_v_zale_form_napitok_add(Convert.ToInt32(dataGridView1.CurrentRow.Cells[0].Value.ToString()), Convert.ToInt32(numericUpDown1.Value.ToString()), Program.CenaVZale * Convert.ToInt32(numericUpDown1.Value.ToString()), Program.Num_Check);
+                    _Proc.zakaz_v_zale_form_napitok_add(Convert.ToInt32(dataGridView1.CurrentRow.Cells[0].Value.ToString()), Convert.ToInt32(numericUpDown1.Value.ToString()), Program.CenaVZale * Convert.ToInt32(numericUpDown1.Value.ToString()), Program.Num_Check_v_zale);
                     textBox1.Text = "";
-                    string Napitok_Check = (dataGridView1.CurrentRow.Cells[1].Value.ToString()+ " "+ dataGridView1.CurrentRow.Cells[3].Value.ToString()).ToString();
-                    listBox1.Items.Add(Napitok_Check.ToString());
+                    SqlCommand Napitok_Check = new SqlCommand("Select [napitok_v_dost_id]+' '+[itog_cena_za_dost] from [dbo].[zakaz_na_dost] where max(id_zakaz_na_dost)",_PB.Connection);
+                    //string Napitok_Check = (dataGridView1.CurrentRow.Cells[1].Value.ToString()+ " "+ dataGridView1.CurrentRow.Cells[3].Value.ToString()).ToString();
+                    //string Napitok_Check=
+                    //Napitok_Check.ExecuteScalar().ToString();
+                    _Viv.Napitok_zal_lb();
+                    listBox1.Items.Add(Program.VivodNapVZaleLB.ToString());
                     Program.CenaVZale = 0;
                     break;
                 case (1):
-                    _Proc.zakaz_v_zale_form_pizza_add(Convert.ToInt32(dataGridView1.CurrentRow.Cells[0].Value.ToString()), Convert.ToInt32(numericUpDown1.Value.ToString()), Program.CenaVZale * Convert.ToInt32(numericUpDown1.Value.ToString()), Program.Num_Check);
+                    _Proc.zakaz_v_zale_form_pizza_add(Convert.ToInt32(dataGridView1.CurrentRow.Cells[0].Value.ToString()), Convert.ToInt32(numericUpDown1.Value.ToString()), Program.CenaVZale * Convert.ToInt32(numericUpDown1.Value.ToString()), Program.Num_Check_v_zale);
                     textBox1.Text = "";
-                    string Pizza_Check = (dataGridView1.CurrentRow.Cells[1].Value.ToString() + " " + dataGridView1.CurrentRow.Cells[3].Value.ToString()).ToString();
-                    listBox1.Items.Add(Pizza_Check.ToString());
+                    _Viv.Pizza_zal_lb();
+                    //  string Pizza_Check = (dataGridView1.CurrentRow.Cells[1].Value.ToString() + " " + dataGridView1.CurrentRow.Cells[3].Value.ToString()).ToString();
+                    //MessageBox.Show(Program.VivodPizzaVZaleLB.ToString());
+                    listBox1.Items.Add( Program.VivodPizzaVZaleLB.ToString());
+                    //listBox1.Items.Add(Program.VivodPizzaVZaleLB.ToString());
                     Program.CenaVZale = 0;
                     break;
 
                     
             }
-            SqlCommand SummaSql = new SqlCommand("SELECT SUM([dbo].[zakaz_v_zale].[itog_cena_v_zale]) FROM [dbo].[zakaz_v_zale] where [dbo].[zakaz_v_zale].[tov_check_v_zale_id]=" + Program.Num_Check.ToString(), _PB.Connection);
+            SqlCommand SummaSql = new SqlCommand("SELECT SUM([dbo].[zakaz_v_zale].[itog_cena_v_zale]) FROM [dbo].[zakaz_v_zale] where [dbo].[zakaz_v_zale].[tov_check_v_zale_id]=" + Program.Num_Check_v_zale.ToString(), _PB.Connection);
             Summa = Convert.ToInt32(SummaSql.ExecuteScalar());
             label1.Text = "Итоговая цена:" + Summa;
             _PB.Connection.Close();
@@ -121,8 +129,8 @@ namespace Pizzeria
         {
             groupBox2.Visible = true;
             _Proc.tov_check_zakaz_v_zale_add(Program.identificator, DateTime.Now);
-            _Viv.NumCheck();
-            groupBox2.Text = ("Заказ №" + Program.Num_Check.ToString());
+            _Viv.NumCheckVZale();
+            groupBox2.Text = ("Заказ №" + Program.Num_Check_v_zale.ToString());
             _PB.Connection.Close();
             button3.Visible = false;
             
@@ -143,6 +151,16 @@ namespace Pizzeria
         {
             button3.Visible = true;
             groupBox1.Visible = false;
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+          // _Proc.zakaz_v_zale_delete("");
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+
         }
     }
     }

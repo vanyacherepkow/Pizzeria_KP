@@ -1,0 +1,1172 @@
+SET ANSI_PADDING ON
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE DATABASE [Pizzeria_v1.1]
+GO
+
+USE [Pizzeria_v1.1]
+GO
+
+create table [dbo].[Razm_pizza]
+(
+[id_razm] int not null Identity (1,1),
+[razmer] int not null,
+constraint [id_razm] Primary Key Clustered ([id_razm]ASC) on [Primary]
+)
+insert into [dbo].[Razm_pizza] (razmer) values (15)
+insert into [dbo].[Razm_pizza] (razmer) values (30)
+insert into [dbo].[Razm_pizza] (razmer) values (45)
+
+Create Table [dbo].[obem_napitka]
+(
+[id_obem] int not null Identity (1,1),
+[obem] float not null
+constraint [id_obem] Primary key Clustered ([id_obem]ASC) on [Primary]
+)
+insert into [dbo].[obem_napitka](obem) values (0.2)
+insert into [dbo].[obem_napitka](obem) values (0.5)
+insert into [dbo].[obem_napitka](obem) values (1)
+insert into [dbo].[obem_napitka](obem) values (2)
+insert into [dbo].[obem_napitka](obem) values (2.25)
+
+create table [dbo].[sklad_s_ingrid]
+(
+[id_ingr] int not null Identity (1,1),
+[Nazv_ingr] varchar(max),
+[kol_vo_ingr] varchar(max) not null
+constraint [id_ingr] primary key clustered ([id_ingr]Asc) on [Primary]
+)
+insert into [dbo].[sklad_s_ingrid] (Nazv_ingr,kol_vo_ingr) values ('Яйца', '200')
+insert into [dbo].[sklad_s_ingrid] (Nazv_ingr,kol_vo_ingr) values ('Помидоры', '5 кг')
+insert into [dbo].[sklad_s_ingrid] (Nazv_ingr,kol_vo_ingr) values ('Мука', '4 кг')
+insert into [dbo].[sklad_s_ingrid] (Nazv_ingr,kol_vo_ingr) values ('Огурцы', '4 кг')
+insert into [dbo].[sklad_s_ingrid] (Nazv_ingr,kol_vo_ingr) values ('Ананас', '5 штук')
+insert into [dbo].[sklad_s_ingrid] (Nazv_ingr,kol_vo_ingr) values ('Сыр', '10 кг')
+insert into [dbo].[sklad_s_ingrid] (Nazv_ingr,kol_vo_ingr) values ('Пепперони', '3 кг')
+insert into [dbo].[sklad_s_ingrid] (Nazv_ingr,kol_vo_ingr) values ('Макароны', '4 кг')
+insert into [dbo].[sklad_s_ingrid] (Nazv_ingr,kol_vo_ingr) values ('Курица', '10 штук')
+insert into [dbo].[sklad_s_ingrid] (Nazv_ingr,kol_vo_ingr) values ('Масло подсолнечное', '4 кг')
+insert into [dbo].[sklad_s_ingrid] (Nazv_ingr,kol_vo_ingr) values ('Крветки', '6 кг')
+insert into [dbo].[sklad_s_ingrid] (Nazv_ingr,kol_vo_ingr) values ('Масло сливочное', '4 кг')
+insert into [dbo].[sklad_s_ingrid] (Nazv_ingr,kol_vo_ingr) values ('Шампиньоны', '5 кг')
+insert into [dbo].[sklad_s_ingrid] (Nazv_ingr,kol_vo_ingr) values ('Картофель', '10 кг')
+insert into [dbo].[sklad_s_ingrid] (Nazv_ingr,kol_vo_ingr) values ('Хлебушек', '20 штук')
+insert into [dbo].[sklad_s_ingrid] (Nazv_ingr,kol_vo_ingr) values ('Багет', '15 штук')
+
+create table [dbo].[rekvizit]
+(
+[id_rekvizit] int not null Identity (1,1),
+[Nazv_rekvizita] varchar(max),
+[Kolichestvo] int not null
+constraint [id_rekvizit] primary key clustered ([id_rekvizit] Asc) on [Primary]
+)
+insert into [dbo].[rekvizit] (Nazv_rekvizita,Kolichestvo) VALues ('Поднос',15)
+insert into [dbo].[rekvizit] (Nazv_rekvizita,Kolichestvo) VALues ('Машина',5)
+insert into [dbo].[rekvizit] (Nazv_rekvizita,Kolichestvo) VALues ('Термосумка',10)
+insert into [dbo].[rekvizit] (Nazv_rekvizita,Kolichestvo) VALues ('Печь',2)
+insert into [dbo].[rekvizit] (Nazv_rekvizita,Kolichestvo) VALues ('Тестоделитель',6)
+insert into [dbo].[rekvizit] (Nazv_rekvizita,Kolichestvo) VALues ('Протвень',4)
+insert into [dbo].[rekvizit] (Nazv_rekvizita,Kolichestvo) VALues ('Овощерезка',3)
+insert into [dbo].[rekvizit] (Nazv_rekvizita,Kolichestvo) VALues ('Миксер',6)
+insert into [dbo].[rekvizit] (Nazv_rekvizita,Kolichestvo) VALues ('Мукопросеиватель',2)
+insert into [dbo].[rekvizit] (Nazv_rekvizita,Kolichestvo) VALues ('Тестомес',2)
+
+
+create table [dbo].[Dost_v_prog]
+(
+[id_dostup] int not null identity (1,1),
+[Sotrudniki] int not null,
+[Klients] int not null,
+[zakaz_v_zale] int not null,
+[zakaz_na_dost] int not null,
+[ingridients] int not null,
+[eda] int not null,
+[Rekvizit] int not null
+constraint [id_dostup] primary key clustered ([id_dostup]Asc) on [Primary]
+)
+
+insert into [dbo].[dost_v_prog] (sotrudniki,Klients,zakaz_v_zale,zakaz_na_dost,ingridients,eda,rekvizit)
+values (1,1,1,1,1,1,1)
+insert into [dbo].[dost_v_prog] (sotrudniki,Klients,zakaz_v_zale,zakaz_na_dost,ingridients,eda,rekvizit)
+values (1,1,0,1,0,1,1)
+insert into [dbo].[dost_v_prog] (sotrudniki,Klients,zakaz_v_zale,zakaz_na_dost,ingridients,eda,rekvizit)
+values (1,1,1,0,0,1,1)
+insert into [dbo].[dost_v_prog] (sotrudniki,Klients,zakaz_v_zale,zakaz_na_dost,ingridients,eda,rekvizit)
+values (1,1,0,1,0,0,1)
+insert into [dbo].[dost_v_prog] (sotrudniki,Klients,zakaz_v_zale,zakaz_na_dost,ingridients,eda,rekvizit)
+values (1,1,0,0,1,1,1)
+
+create table [dbo].[Dolj]
+(
+[id_dolj] int not null identity (1,1),
+[dostup_id] int not null,
+[nazv_dolj] varchar(30) not null
+constraint [id_dolj] primary key clustered ([id_dolj]ASC) on [Primary]
+constraint [FK_dostup_id] Foreign Key ([dostup_id])
+references [dbo].[dost_v_prog]([id_dostup])
+)
+insert into [dbo].[Dolj] (dostup_id,Nazv_dolj) values (1,'Администратор')
+insert into [dbo].[Dolj] (dostup_id,Nazv_dolj) values (2,'Оператор')
+insert into [dbo].[Dolj] (dostup_id,Nazv_dolj) values (3,'Официант')
+insert into [dbo].[Dolj] (dostup_id,Nazv_dolj) values (4,'Курьер')
+insert into [dbo].[Dolj] (dostup_id,Nazv_dolj) values (5,'Повар')
+
+create table [dbo].[eda]
+(
+[id_eda] int not null identity (1,1),
+[Naim_blud] varchar(max),
+[cena_bluda] int not null
+constraint [id_eda] primary key clustered ([id_eda]Asc) on [Primary]
+)
+insert into [dbo].[eda] (Naim_blud, cena_bluda) values ('15 острых крылышек',500)
+insert into [dbo].[eda] (Naim_blud, cena_bluda) values ('Гренки чесночные 250г',300)
+insert into [dbo].[eda] (Naim_blud, cena_bluda) values ('Сырные палочки',250)
+insert into [dbo].[eda] (Naim_blud, cena_bluda) values ('Куриные наггетсы 10 штук',200)
+insert into [dbo].[eda] (Naim_blud, cena_bluda) values ('Гренки чесночные 500г',500)
+insert into [dbo].[eda] (Naim_blud, cena_bluda) values ('Картофель фри',150)
+
+create table [dbo].[pizza]
+(
+[id_pizza] int not null Identity (1,1),
+[Nazv_pizza] varchar (max) not null,
+[Cena_pizza] int not null,
+[razm_id] int not null
+constraint [id_pizza] primary key clustered ([id_pizza]Asc) on [Primary],
+constraint [FK_razm_id] foreign key ([razm_id])
+references [dbo].[razm_pizza]([id_razm])
+)
+insert into [dbo].[pizza] (Nazv_pizza,Cena_pizza,razm_id) values ('Пицца Пепперони',310,1)
+insert into [dbo].[pizza] (Nazv_pizza,Cena_pizza,razm_id) values ('Пицца Пепперони',450,2)
+insert into [dbo].[pizza] (Nazv_pizza,Cena_pizza,razm_id) values ('Пицца Пепперони',600,3)
+insert into [dbo].[pizza] (Nazv_pizza,Cena_pizza,razm_id) values ('Пицца Маргарита',250,1)
+insert into [dbo].[pizza] (Nazv_pizza,Cena_pizza,razm_id) values ('Пицца Маргарита',400,2)
+insert into [dbo].[pizza] (Nazv_pizza,Cena_pizza,razm_id) values ('Пицца Маргарита',550,3)
+insert into [dbo].[pizza] (Nazv_pizza,Cena_pizza,razm_id) values ('Пицца Морская',650,1)
+insert into [dbo].[pizza] (Nazv_pizza,Cena_pizza,razm_id) values ('Пицца Морская',800,2)
+insert into [dbo].[pizza] (Nazv_pizza,Cena_pizza,razm_id) values ('Пицца Морская',950,3)
+insert into [dbo].[pizza] (Nazv_pizza,Cena_pizza,razm_id) values ('Пицца Мясная',600,1)
+insert into [dbo].[pizza] (Nazv_pizza,Cena_pizza,razm_id) values ('Пицца Мясная',750,2)
+insert into [dbo].[pizza] (Nazv_pizza,Cena_pizza,razm_id) values ('Пицца Мясная',900,3)
+insert into [dbo].[pizza] (Nazv_pizza,Cena_pizza,razm_id) values ('Пицца Куриная',400,1)
+insert into [dbo].[pizza] (Nazv_pizza,Cena_pizza,razm_id) values ('Пицца Курианя',550,2)
+insert into [dbo].[pizza] (Nazv_pizza,Cena_pizza,razm_id) values ('Пицца Куриная',700,3)
+insert into [dbo].[pizza] (Nazv_pizza,Cena_pizza,razm_id) values ('Пицца Гавайская',310,1)
+insert into [dbo].[pizza] (Nazv_pizza,Cena_pizza,razm_id) values ('Пицца Гавайская',450,2)
+insert into [dbo].[pizza] (Nazv_pizza,Cena_pizza,razm_id) values ('Пицца Гавайская',600,3)
+insert into [dbo].[pizza] (Nazv_pizza,Cena_pizza,razm_id) values ('Пицца Грибная',310,1)
+insert into [dbo].[pizza] (Nazv_pizza,Cena_pizza,razm_id) values ('Пицца Грибная',450,2)
+insert into [dbo].[pizza] (Nazv_pizza,Cena_pizza,razm_id) values ('Пицца Грибная',600,3)
+
+create table [dbo].[napitok]
+(
+[id_napitok] int not null identity(1,1),
+[nazv_napitka] varchar (max) not null,
+[cena_napitka] int not null,
+[obem_id] int not null
+constraint [id_napitok] primary key clustered ([id_napitok]Asc) on [Primary]
+constraint [FK_obem_id] foreign key ([obem_id])
+references [dbo].[obem_napitka]([id_obem])
+)
+insert into [dbo].[napitok] (nazv_napitka,obem_id,cena_napitka) values ('Coca-Cola',1,40)
+insert into [dbo].[napitok] (nazv_napitka,obem_id,cena_napitka) values ('Coca-Cola',2,80)
+insert into [dbo].[napitok] (nazv_napitka,obem_id,cena_napitka) values ('Coca-Cola',3,100)
+insert into [dbo].[napitok] (nazv_napitka,obem_id,cena_napitka) values ('Coca-Cola',4,120)
+insert into [dbo].[napitok] (nazv_napitka,obem_id,cena_napitka) values ('Coca-Cola',5,150)
+insert into [dbo].[napitok] (nazv_napitka,obem_id,cena_napitka) values ('Sprite',1,40)
+insert into [dbo].[napitok] (nazv_napitka,obem_id,cena_napitka) values ('Sprite',2,80)
+insert into [dbo].[napitok] (nazv_napitka,obem_id,cena_napitka) values ('Sprite',3,100)
+insert into [dbo].[napitok] (nazv_napitka,obem_id,cena_napitka) values ('Sprite',4,120)
+insert into [dbo].[napitok] (nazv_napitka,obem_id,cena_napitka) values ('Sprite',5,150)
+insert into [dbo].[napitok] (nazv_napitka,obem_id,cena_napitka) values ('Fanta',1,40)
+insert into [dbo].[napitok] (nazv_napitka,obem_id,cena_napitka) values ('Fanta',2,80)
+insert into [dbo].[napitok] (nazv_napitka,obem_id,cena_napitka) values ('Fanta',3,100)
+insert into [dbo].[napitok] (nazv_napitka,obem_id,cena_napitka) values ('Fanta',4,120)
+insert into [dbo].[napitok] (nazv_napitka,obem_id,cena_napitka) values ('Fanta',5,150)
+insert into [dbo].[napitok] (nazv_napitka,obem_id,cena_napitka) values ('Coca Cola Zero',1,40)
+insert into [dbo].[napitok] (nazv_napitka,obem_id,cena_napitka) values ('Coca Cola Zero',2,80)
+insert into [dbo].[napitok] (nazv_napitka,obem_id,cena_napitka) values ('Coca Cola Zero',3,100)
+insert into [dbo].[napitok] (nazv_napitka,obem_id,cena_napitka) values ('Coca Cola Zero',4,120)
+insert into [dbo].[napitok] (nazv_napitka,obem_id,cena_napitka) values ('Coca Cola Zero',5,150)
+insert into [dbo].[napitok] (nazv_napitka,obem_id,cena_napitka) values ('BonAqua',2,50)
+insert into [dbo].[napitok] (nazv_napitka,obem_id,cena_napitka) values ('BonAqua',3,80)
+insert into [dbo].[napitok] (nazv_napitka,obem_id,cena_napitka) values ('BonAqua',4,100)
+
+create table [dbo].[klient] 
+(
+[id_klient] int not null identity (1,1),
+[Fam_Klient] varchar (30),
+[Im_Klient] varchar (30),
+[Otch_Klient] varchar (30),
+[Tel_Klient] varchar (18),
+[Adres_klient] varchar (max)
+constraint [id_klient] primary key clustered ([id_klient]Asc)on[Primary]
+)
+insert into [dbo].[klient] values ('Пустохина','Екатерина','Ираклиевна','+7-(942)-554-29-02','г. Москва, ул. Автомоторная, дом 80, квартира 125');
+insert into [dbo].[klient] values ('Краснов','Мирон','Игоревич','+7-(926)-735-15-27','г. Мсоква, ул. Жёлтиковская 1-я, дом 65, квартира 292');
+insert into [dbo].[klient] values ('Грибкова','Ариадна','Данилевна','+7-(974)-175-83-13','г. Москва, ул. Молодёжная, дом 83, квартира 59');
+insert into [dbo].[klient] values ('Нырков','Богдан','Юриевич','+7-(903)-619-13-61','г. Москва, ул. Веселова, дом 25, квартира 169');
+
+create table [dbo].[sotrudnik]
+(
+[id_sotr] int not null identity (1,1),
+[Fam_Sotr] varchar (30) not null,
+[Im_Sotr] varchar (30) not null,
+[Otch_Sotr] varchar (30) not null,
+[Password] varchar (30) not null,
+[System_access] int not null,
+[kol_vo_rek_za_kot_otv_sotr] int not null,
+[dolj_id] int not null,
+[Admin_access] int not null,
+constraint [id_sotr] primary key clustered ([id_sotr]Asc)on[Primary],
+constraint [FK_Dolj_id] foreign key ([dolj_id])
+references [dbo].[dolj]([id_dolj])
+)
+insert into [dbo].[sotrudnik] values ('Желудков','Виктор','Игоревич','Administrator_1',1,1,1,1);
+insert into [dbo].[sotrudnik] values ('Дану','Мария','Викторовна','Sotrudnik_1',1,2,2,0);
+insert into [dbo].[sotrudnik] values ('Литвинов','Дмитрий','Владимирович','Sotrudnik_2',1,2,3,0);
+insert into [dbo].[sotrudnik] values ('Петрова','Александра','Трофимовна ','Sotrudnik_3',1,1,4,0);
+insert into [dbo].[sotrudnik] values ('Щитт','Аскольд','Афанасиевич','Sotrudnik_4',1,2,5,0);
+insert into [dbo].[sotrudnik] values ('Енотов','Эммануил','Зиновиевич','Sotrudnik_5',1,1,5,0);
+insert into [dbo].[sotrudnik] values ('Полушин','Юрий','Федосиевич','Sotrudnik_6',1,2,2,0);
+insert into [dbo].[sotrudnik] values ('Малышева','Аза','Олеговна','Sotrudnik_7',0,1,3,0);
+insert into [dbo].[sotrudnik] values ('Суслов','Артём','Сергеевич','Sotrudnik_8',1,3,5,0);
+
+create table [dbo].[Sotr_Rekv]
+(
+[id_SotrRekv] int not null identity (1,1),
+[rekvizit_id] int not null,
+[sotr_v_rekv_id] int not null
+constraint [id_SotrRekv] primary key clustered ([id_SotrRekv]Asc) on [Primary],
+constraint [FK_rekvizit_id] foreign key ([rekvizit_id]) 
+references [dbo].[rekvizit]([id_rekvizit]),
+constraint [FK_sotr_v_rekv_id] foreign key ([sotr_v_rekv_id])
+references [dbo].[Sotrudnik]([id_sotr])
+)
+
+create table [tov_check_za_dost]
+(
+[id_tov_check_za_dost] int not null identity (1,1),
+[sotr_v_dost_id] int not null,
+[klient_id] int not null,
+[vrem_zakaz_na_dost] datetime
+constraint [FK_sotr_v_dost_id] foreign key ([sotr_v_dost_id])
+references [dbo].[sotrudnik]([id_sotr]),
+constraint [FK_klient_id] foreign key ([klient_id])
+references [dbo].[klient]([id_klient]),
+constraint [id_tov_check_za_dost] primary key clustered ([id_tov_check_za_dost]ASc) on [Primary]
+)
+
+create table [tov_check_za_zakaz]
+(
+[id_tov_check_v_zale] int not null identity (1,1),
+[sotr_id] int not null,
+[vrem_zakaz_v_zale] datetime
+constraint [FK_sotr_id] foreign key ([sotr_id])
+references [dbo].[sotrudnik]([id_sotr]),
+constraint [id_tov_check_v_zale] primary key clustered ([id_tov_check_v_zale]ASc) on [Primary]
+)
+
+create table [dbo].[zakaz_v_zale]
+(
+[id_zakaz_v_zale] int not null identity (1,1),
+[napitok_v_zale_id] int,
+[pizza_v_zale_id] int,
+[eda_v_zale_id] int,
+[kol_vo_za_poz_v_zale] int not null,
+[itog_cena_v_zale] int not null,
+[tov_check_v_zale_id] int not null
+constraint [id_zakaz_v_zale] primary key clustered ([id_zakaz_v_zale]Asc)on[Primary],
+constraint [FK_napitok_v_zale_id] foreign key ([napitok_v_zale_id])
+references [dbo].[napitok]([id_napitok]),
+constraint [FK_eda_v_zale_id] foreign key ([eda_v_zale_id])
+references [dbo].[eda]([id_eda]),
+constraint [FK_pizza_v_zale_id] foreign key ([pizza_v_zale_id])
+references [dbo].[pizza]([id_pizza]),
+constraint [FK_tov_check_v_zale_id] foreign key ([tov_check_v_zale_id])
+references [dbo].[tov_check_za_zakaz]([id_tov_check_v_zale])
+)
+create table [dbo].[zakaz_na_dost]
+(
+[id_zakaz_na_dost] int not null identity (1,1),
+[napitok_v_dost_id] int,
+[pizza_v_dost_id] int,
+[eda_v_dost_id] int,
+[kol_vo_za_poz_v_dost] int not null,
+[itog_cena_za_dost] int not null,
+[tov_check_na_dost_id] int not null,
+[kureer_dost_id] int not null,
+constraint [id_zakaz] primary key clustered ([id_zakaz_na_dost]Asc)on[Primary],
+constraint [FK_napitok_v_dost_id] foreign key ([napitok_v_dost_id])
+references [dbo].[napitok]([id_napitok]),
+constraint [FK_eda_v_dost_id] foreign key ([eda_v_dost_id])
+references [dbo].[eda]([id_eda]),
+constraint [FK_pizza_v_dost_id] foreign key ([pizza_v_dost_id])
+references [dbo].[pizza]([id_pizza]),
+constraint [FK_tov_check_na_dost_id] foreign key ([tov_check_na_dost_id])
+references [dbo].[tov_check_za_dost]([id_tov_check_za_dost]),
+constraint [FK_kureer_dost_id] foreign key ([kureer_dost_id])
+references [dbo].[sotrudnik]([id_Sotr])
+)
+create table [dbo].[Uch_knig]
+(
+[id_uchet_knig] int not null identity (1,1),
+[zakaz_v_zale_id]int not null,
+[zakaz_na_dost_id] int not null
+constraint [id_uchet_knig] primary key clustered ([id_uchet_knig]Asc) on [Primary],
+constraint [FK_[zakaz_v_zale_id] foreign key ([zakaz_v_zale_id])
+references [dbo].[zakaz_v_zale]([id_zakaz_v_zale]),
+constraint [FK_zakaz_na_dost_id] foreign key ([zakaz_na_dost_id])
+references [dbo].[zakaz_na_dost]([id_zakaz_na_dost])
+)
+create table [dbo].[Eda_ingr]
+(
+[id_EdaIngr] int not null identity (1,1),
+[eda_Ingr_id] int not null,
+[ingr_eda_id] int not null
+constraint [id_EdaIngr] primary key clustered ([id_edaIngr]Asc) on [Primary],
+constraint [FK_eda_ingr_id] foreign key ([eda_ingr_id])
+references [dbo].[eda] ([id_eda]),
+constraint [FK_ingr_eda_id] foreign key ([ingr_eda_id])
+references [dbo].[sklad_s_ingrid]([id_ingr])
+)
+
+create table [dbo].[pizza_ingr]
+(
+[id_PizzaIngr] int not null identity(1,1),
+[pizza_Ingr_id] int not null,
+[ingr_pizza_id] int not null
+constraint [id_PizzaIngr] primary key clustered ([id_PizzaIngr]Asc) on [Primary],
+constraint [FK_pizza_ingr_id] foreign key ([pizza_ingr_id])
+references [dbo].[pizza] ([id_pizza]),
+constraint [FK_ingr_pizza_id] foreign key ([ingr_pizza_id])
+references [dbo].[sklad_s_ingrid]([id_ingr])
+)
+
+
+
+go
+create procedure [dbo].[dolj_delete]
+@id_dolj int
+as 
+delete from [Dolj]
+where @id_dolj=id_dolj
+
+go
+create procedure [dbo].[Dost_v_prog_delete]
+@id_dostup int
+as 
+delete from [Dost_v_prog]
+where @id_dostup=id_dostup;
+go
+
+create procedure [dbo].[eda_delete]
+@id_eda int
+as 
+delete from [eda]
+where @id_eda=id_eda;
+
+go
+create procedure [dbo].[napitok_delete]
+@id_napitok int
+as 
+delete from [napitok]
+where @id_napitok=id_napitok
+go
+
+create procedure [dbo].[obem_napitok_delete]
+@id_obem int
+as 
+delete from [obem_napitka]
+where @id_obem=id_obem
+
+go
+create procedure [dbo].[pizza_delete]
+@id_pizza int
+as 
+delete from [pizza]
+where @id_pizza=id_pizza
+
+go
+create procedure [dbo].[rekvizit_delete]
+@id_rekvizit int
+as 
+delete from [rekvizit]
+where @id_rekvizit=id_rekvizit
+
+go
+create procedure [dbo].[sklad_s_ingrid_delete]
+@id_ingr int
+as 
+delete from [sklad_s_ingrid]
+where @id_ingr=id_ingr
+
+go
+create procedure [dbo].[tov_check_za_dost_delete]
+@id_tov_check_za_dost int
+as 
+delete from [tov_check_za_dost]
+where @id_tov_check_za_dost=id_tov_check_za_dost
+
+go
+create procedure [dbo].[tov_check_v_zale_delete]
+@id_tov_check_v_zale int
+as 
+delete from [tov_check_za_zakaz]
+where @id_tov_check_v_zale=id_tov_check_v_zale
+
+go
+create procedure [dbo].[uch_knig_delete]
+@id_uchet_knig int
+as 
+delete from [uch_knig]
+where @id_uchet_knig=id_uchet_knig
+
+go
+create procedure [dbo].[zakaz_na_dost_delete]
+@id_zakaz_na_dost int
+as 
+delete from [zakaz_na_dost]
+where @id_zakaz_na_dost=id_zakaz_na_dost
+
+go
+create procedure [dbo].[zakaz_v_zale_delete]
+@id_zakaz_v_zale int
+as 
+delete from [zakaz_v_zale]
+where @id_zakaz_v_zale=id_zakaz_v_zale
+go
+create procedure [dbo].[eda_ingr_delete]
+@id_EdaIngr int
+as 
+delete from [Eda_ingr] where @id_EdaIngr=id_EdaIngr
+
+go
+create procedure [dbo].[pizza_ingr_delete]
+@id_PizzaIngr int
+as 
+delete from [Pizza_Ingr]
+where @id_PizzaIngr=id_PizzaIngr
+
+go
+create procedure [dbo].[sotr_Rekv_delete]
+@id_Sotr_Rekv int
+as 
+delete from [Sotr_Rekv]
+where @id_Sotr_Rekv=id_SotrRekv
+
+go
+create procedure [dbo].[Klient_delete]
+@id_klient int
+as
+delete from [klient]
+where @id_klient=id_klient
+
+go
+create procedure [dbo].[razm_pizza_delete]
+@id_razm int
+as 
+delete from [Razm_pizza]
+where @id_razm=id_razm
+
+go
+create procedure [dbo].[Sotrudnik_delete]
+@id_sotr int
+as
+delete from [sotrudnik]
+where @id_sotr=id_sotr
+
+go
+create procedure [dbo].[dolj_edit]
+@id_dolj int,
+@dostup_id int,
+@nazv_Dolj varchar (max)
+as
+update [Dolj]
+set
+dostup_id=@dostup_id,
+nazv_dolj=@nazv_Dolj
+where id_dolj=@id_dolj
+
+go
+create procedure [dbo].[Dost_v_prog_edit]
+@id_dostup int,
+@Sotrudniki int,
+@Klients int,
+@zakaz_v_zale int,
+@zakaz_na_dost int,
+@ingridients int,
+@eda int,
+@rekvizit int
+as
+update [Dost_v_prog]
+set
+Sotrudniki=@Sotrudniki,
+Klients=@Klients,
+zakaz_v_zale=@zakaz_v_zale,
+zakaz_na_dost=@zakaz_na_dost,
+ingridients=@ingridients,
+eda=@eda,
+Rekvizit=@rekvizit
+where id_dostup=@id_dostup
+
+go
+create procedure [dbo].[eda_edit]
+@id_eda int,
+@Naim_blud varchar(max),
+@cena_bluda int
+as
+update [eda]
+set
+Naim_blud=@Naim_blud,
+cena_bluda=@cena_bluda
+where id_eda=@id_eda
+
+
+go
+create procedure [dbo].[eda_ingr_edit]
+@id_EdaIngr int,
+@eda_ingr_id int,
+@ingr_eda_id int
+as
+update [Eda_ingr]
+set
+eda_Ingr_id=@eda_ingr_id,
+ingr_eda_id=@ingr_eda_id
+where id_EdaIngr=@id_EdaIngr
+go
+create procedure [dbo].[klient_edit]
+@ID_Klient int,
+@Fam_Klient varchar(30),
+@Im_Klient varchar(30),
+@Otch_Klient varchar(30),
+@Tel_Klient varchar(30),
+@Adres_Klient varchar(30)
+as
+update [klient]
+set
+Fam_Klient=@Fam_Klient,
+Im_Klient=@Im_Klient,
+Otch_Klient=@Otch_Klient,
+Tel_Klient=@Tel_Klient,
+Adres_klient=@Adres_Klient
+where id_klient=@id_klient
+
+
+go
+create procedure [dbo].[napitok_edit]
+@id_napitok int,
+@nazv_napitka varchar(max),
+@cena_napitka int,
+@obem_napitka int
+as
+update [napitok]
+set
+nazv_napitka=@nazv_napitka,
+cena_napitka=@cena_napitka,
+obem_id=@obem_napitka
+where id_napitok=@id_napitok
+
+go
+create procedure [dbo].[obem_napitka_edit]
+@id_obem int,
+@obem float
+as
+update [obem_napitka]
+set
+obem=@obem
+where id_obem=@id_obem
+
+go
+create procedure [dbo].[pizza_edit]
+@id_pizza int,
+@Nazv_pizza varchar(max),
+@Cena_Pizza int,
+@razm_id int
+as
+update [pizza]
+set
+Nazv_pizza=@Nazv_pizza,
+Cena_pizza=@Cena_Pizza,
+razm_id=@razm_id
+where id_pizza=@id_pizza
+
+go
+create procedure [dbo].[pizza_ingr_edit]
+@id_PizzaIngr int,
+@pizza_ingr_id int,
+@ingr_pizza_id int
+as
+update [pizza_ingr]
+set
+pizza_Ingr_id=@pizza_ingr_id,
+ingr_pizza_id=@ingr_pizza_id
+where id_PizzaIngr=@id_PizzaIngr
+
+go
+create procedure [dbo].[razm_pizza_edit]
+@id_razm int,
+@razmer int
+as
+update [Razm_pizza]
+set
+razmer=@razmer
+where id_razm=@id_razm
+
+go
+create procedure [dbo].[rekvizit_edit]
+@id_rekvizit int,
+@Nazv_rekvizita varchar (max),
+@Kolichestvo int
+as
+update [rekvizit]
+set
+Nazv_rekvizita=@Nazv_rekvizita,
+Kolichestvo=@Kolichestvo
+where id_rekvizit=@id_rekvizit
+
+go
+create procedure [dbo].[sklad_s ingr_edit]
+@id_ingr int,
+@Nazv_ingr varchar (max),
+@Kol_vo_ingr varchar (max)
+as
+update [sklad_s_ingrid]
+set
+Nazv_ingr=@Nazv_ingr,
+kol_vo_ingr=@Kol_vo_ingr
+where id_ingr=@id_ingr
+
+go
+create procedure [dbo].[Sotr_Rekv_edit]
+@id_SotrRekv int,
+@rekvizit_id int,
+@sotr_v_rekv_id int
+as
+update [Sotr_Rekv]
+set
+rekvizit_id=@rekvizit_id,
+sotr_v_rekv_id=@sotr_v_rekv_id
+where id_SotrRekv=@id_SotrRekv
+
+go
+create procedure [dbo].[sotrudnik_edit]
+@id_sotr int,
+@Fam_Sotr varchar (30),
+@Im_Sotr varchar (30),
+@Otch_Sotr varchar (30),
+@Password varchar (30),
+@System_Access int,
+@Kol_vo_rek_za_kot_otv_sotr int,
+@dolj_id int
+as
+update [sotrudnik]
+set
+Fam_Sotr=@Fam_Sotr,
+Im_Sotr=@Im_Sotr,
+Otch_Sotr=@Otch_Sotr,
+Password=@Password,
+System_access=@System_Access,
+kol_vo_rek_za_kot_otv_sotr=@Kol_vo_rek_za_kot_otv_sotr,
+dolj_id=@dolj_id
+where id_sotr=@id_sotr
+
+go
+create procedure [dbo].[tov_check_za_dost_edit]
+@id_tov_check_za_dost int,
+@vrem_zakaz_na_dost datetime,
+@sotr_v_dost_id int,
+@klient_id int
+as
+update [tov_check_za_dost]
+set
+vrem_zakaz_na_dost=@vrem_zakaz_na_dost,
+sotr_v_dost_id=@sotr_v_dost_id,
+klient_id=@klient_id
+where
+id_tov_check_za_dost=@id_tov_check_za_dost
+
+
+go
+create procedure [dbo].[tov_check_za_zakaz_edit]
+@id_tov_check_v_zale int,
+@sotr_id int,
+@vrem_zakaz_v_zale datetime
+as
+update [tov_check_za_zakaz]
+set
+vrem_zakaz_v_zale=@vrem_zakaz_v_zale,
+sotr_id=@sotr_id
+where id_tov_check_v_zale=@id_tov_check_v_zale
+
+go
+create procedure [dbo].[Uch_knig_edit]
+@id_uchet_knig int,
+@zakaz_v_zale_id int,
+@zakaz_na_dost_id int
+as
+update [Uch_knig]
+set
+zakaz_v_zale_id=@zakaz_v_zale_id,
+zakaz_na_dost_id=@zakaz_na_dost_id
+where id_uchet_knig=@id_uchet_knig
+
+go
+create procedure [dbo].[zakaz_v_zale_edit]
+@id_zakaz_v_zale int,
+@napitok_v_zale_id int,
+@pizza_v_zale_id int ,
+@eda_v_zale_id int,
+@kol_vo_za_poz_v_zale int,
+@itog_cena_v_zale int
+as
+update [zakaz_v_zale]
+set
+napitok_v_zale_id=@napitok_v_zale_id,
+pizza_v_zale_id=@pizza_v_zale_id,
+eda_v_zale_id=@eda_v_zale_id,
+kol_vo_za_poz_v_zale=@kol_vo_za_poz_v_zale,
+itog_cena_v_zale=@itog_cena_v_zale
+where id_zakaz_v_zale=@id_zakaz_v_zale
+
+go
+create procedure [dbo].[zakaz_na_dost_edit]
+@id_zakaz_na_dost int,
+@napitok_na_dost_id int,
+@pizza_na_dost_id int ,
+@eda_na_dost_id int,
+@kol_vo_za_poz_na_dost int,
+@itog_cena_na_dost int,
+@tov_check_v_zale_id int,
+@kureer_dost_id int
+as
+update [zakaz_na_dost]
+set
+napitok_v_dost_id=@napitok_na_dost_id,
+pizza_v_dost_id=@pizza_na_dost_id,
+eda_v_dost_id=@eda_na_dost_id,
+kol_vo_za_poz_v_dost=@kol_vo_za_poz_na_dost,
+itog_cena_za_dost=@itog_cena_na_dost,
+tov_check_na_dost_id=@tov_check_v_zale_id,
+kureer_dost_id=@kureer_dost_id
+where id_zakaz_na_dost=@id_zakaz_na_dost
+
+go
+create procedure [dbo].[dolj_add]
+@dostup_id int,
+@nazv_Dolj varchar (max)
+as
+insert into [dbo].[Dolj] (dostup_id,nazv_dolj) values (@dostup_id,@nazv_Dolj)
+go
+
+create procedure [dbo].[dost_v_prog_add]
+@Sotrudniki int,
+@Klients int,
+@zakaz_v_zale int,
+@zakaz_na_dost int,
+@ingridients int,
+@eda int,
+@rekvizit int
+as
+insert into [dbo].[Dost_v_prog] (Sotrudniki,Klients,zakaz_v_zale,zakaz_na_dost,ingridients,eda,Rekvizit)
+values (@Sotrudniki,@Klients,@zakaz_v_zale,@zakaz_na_dost,@ingridients,@eda,@rekvizit )
+go
+
+create procedure [dbo].[eda_add]
+@Naim_blud varchar(max),
+@cena_bluda int
+as
+insert into [dbo].[eda] (Naim_blud,cena_bluda) values (@Naim_blud,@cena_bluda)
+go
+
+create procedure [eda_ingr_add]
+@eda_ingr_id int,
+@ingr_eda_id int
+as
+insert into [dbo].[Eda_ingr] (eda_Ingr_id,ingr_eda_id) values (@eda_ingr_id,@ingr_eda_id)
+go
+
+create procedure [dbo].[klient_add]
+@Fam_Klient varchar(30),
+@Im_Klient varchar(30),
+@Otch_Klient varchar(30),
+@Tel_Klient varchar(30),
+@Adres_Klient varchar(30)
+as
+insert into [dbo].[klient] (Fam_Klient,Im_Klient,Otch_Klient,Tel_Klient,Adres_klient) 
+values (@Fam_Klient,@Im_Klient,@Otch_Klient,@Tel_Klient,@Adres_Klient)
+go
+
+create procedure [dbo].[napitok_add]
+@nazv_napitka varchar(max),
+@cena_napitka int,
+@obem_napitka int
+as
+insert into [dbo].[napitok] (nazv_napitka,cena_napitka,obem_id) values (@nazv_napitka,@cena_napitka,@obem_napitka)
+go
+
+create procedure [dbo].[obem_napitka_add]
+@obem float
+as
+insert into [dbo].[obem_napitka] (obem) values (@obem)
+go
+
+create procedure [dbo].[pizza_add]
+@Nazv_pizza varchar(max),
+@Cena_Pizza int,
+@razm_id int
+as insert into [pizza](Nazv_pizza,Cena_pizza,razm_id)
+values (@Nazv_pizza,@Cena_Pizza,@razm_id)
+go
+
+create procedure [pizza_ingr_add]
+@pizza_ingr_id int,
+@ingr_pizza_id int
+as 
+insert into [dbo].[pizza_ingr] (pizza_Ingr_id,ingr_pizza_id) values (@pizza_ingr_id,@ingr_pizza_id)
+go
+
+create procedure [razm_pizza_add]
+@razmer int
+as insert into [dbo].[Razm_pizza] (razmer) values (@razmer)
+go
+
+create procedure [rekvizit_add]
+@Nazv_rekvizita varchar (max),
+@Kolichestvo int
+as insert into [dbo].[rekvizit] (Nazv_rekvizita,Kolichestvo) values (@Nazv_rekvizita,@Kolichestvo)
+go
+
+create procedure [dbo].[sklad_s_ingrid_add]
+@Nazv_ingr varchar (max),
+@Kol_vo_ingr varchar (max)
+as insert into [dbo].[sklad_s_ingrid] (Nazv_ingr,kol_vo_ingr) values (@Nazv_ingr,@Kol_vo_ingr)
+go
+
+create procedure [dbo].[sotr_rekv_add]
+@rekvizit_id int,
+@sotr_v_rekv_id int
+as 
+insert into [dbo].[Sotr_Rekv] (rekvizit_id,sotr_v_rekv_id) values (@rekvizit_id,@sotr_v_rekv_id)
+go
+
+create procedure [dbo].[sotrudnik_add]
+@Fam_Sotr varchar (30),
+@Im_Sotr varchar (30),
+@Otch_Sotr varchar (30),
+@Password varchar (30),
+@System_Access int,
+@Kol_vo_rek_za_kot_otv_sotr int,
+@dolj_id int
+as insert into [dbo].[sotrudnik](Fam_Sotr,Im_Sotr,Otch_Sotr,Password,System_access,kol_vo_rek_za_kot_otv_sotr,dolj_id)
+values (@Fam_Sotr, @Im_Sotr, @Otch_Sotr, @Password, @System_Access, @Kol_vo_rek_za_kot_otv_sotr, @dolj_id)
+go
+
+create procedure [dbo].[tov_check_za_dost_add]
+@sotr_v_dost_id int,
+@klient_id int,
+@vrem_zakaz_na_dost datetime
+as 
+insert into [dbo].[tov_check_za_dost] (sotr_v_dost_id,klient_id,vrem_zakaz_na_dost) values (@sotr_v_dost_id,@klient_id,@vrem_zakaz_na_dost)
+go
+
+create procedure [dbo].[tov_check_za_zakaz_add]
+@sotr_id int,
+@vrem_zakaz_v_zale datetime
+as
+insert into [dbo].[tov_check_za_zakaz](sotr_id,vrem_zakaz_v_zale) values (@sotr_id,@vrem_zakaz_v_zale)
+go
+
+create procedure [dbo].[uch_knig_add]
+@zakaz_v_zale_id int,
+@zakaz_na_dost_id int
+as insert into [dbo].[Uch_knig] (zakaz_v_zale_id,zakaz_na_dost_id) values (@zakaz_v_zale_id,@zakaz_na_dost_id)
+go
+
+create procedure [dbo].[zakaz_v_zale_eda_add]
+@eda_v_zale_id int,
+@kol_vo_za_poz_v_zale int,
+@itog_cena_v_zale int,
+@tov_check_v_zale_id int
+as insert into [dbo].[zakaz_v_zale]
+(eda_v_zale_id,kol_vo_za_poz_v_zale,itog_cena_v_zale,tov_check_v_zale_id) 
+values (  @eda_v_zale_id, @kol_vo_za_poz_v_zale, @itog_cena_v_zale,@tov_check_v_zale_id)
+go
+
+create procedure [dbo].[zakaz_v_zale_pizza_add]
+@pizza_v_zale_id int,
+@kol_vo_za_poz_v_zale int,
+@itog_cena_v_zale int,
+@tov_check_v_zale_id int
+as insert into [dbo].[zakaz_v_zale]
+(pizza_v_zale_id,kol_vo_za_poz_v_zale,itog_cena_v_zale,tov_check_v_zale_id) 
+values (  @pizza_v_zale_id, @kol_vo_za_poz_v_zale, @itog_cena_v_zale,@tov_check_v_zale_id)
+go
+
+CREATE PROCEDURE [dbo].[zakaz_v_zale_napitok_add]
+@napitok_v_zale_id int,
+@kol_vo_za_poz_v_zale int,
+@itog_cena_v_zale int,
+@tov_check_v_zale_id int
+as insert into [dbo].[zakaz_v_zale]
+(napitok_v_zale_id,kol_vo_za_poz_v_zale,itog_cena_v_zale,tov_check_v_zale_id) 
+values (  @napitok_v_zale_id, @kol_vo_za_poz_v_zale, @itog_cena_v_zale,@tov_check_v_zale_id)
+go
+
+create procedure [dbo].[zakaz_na_dost_eda_add]
+@eda_v_dost_id int,
+@kol_vo_za_poz_v_dost int,
+@itog_cena_za_dost int,
+@tov_check_na_dost_id int,
+@kureer_dost_id int
+as insert into [dbo].[zakaz_na_dost]
+(eda_v_dost_id,kol_vo_za_poz_v_dost,itog_cena_za_dost,tov_check_na_dost_id,kureer_dost_id) 
+values (  @eda_v_dost_id,@kol_vo_za_poz_v_dost,@itog_cena_za_dost,@tov_check_na_dost_id,@kureer_dost_id)
+go
+
+create procedure [dbo].[zakaz_na_dost_napitok_add]
+@napitok_v_dost_id int,
+@kol_vo_za_poz_v_dost int,
+@itog_cena_za_dost int,
+@tov_check_na_dost_id int,
+@kureer_dost_id int
+as insert into [dbo].[zakaz_na_dost]
+(napitok_v_dost_id,kol_vo_za_poz_v_dost,itog_cena_za_dost,tov_check_na_dost_id,kureer_dost_id) 
+values (  @napitok_v_dost_id,@kol_vo_za_poz_v_dost,@itog_cena_za_dost,@tov_check_na_dost_id,@kureer_dost_id)
+go
+
+create procedure [dbo].[zakaz_na_dost_pizza_add]
+@pizza_v_dost_id int,
+@kol_vo_za_poz_v_dost int,
+@itog_cena_za_dost int,
+@tov_check_na_dost_id int,
+@kureer_dost_id int
+as insert into [dbo].[zakaz_na_dost]
+(pizza_v_dost_id,kol_vo_za_poz_v_dost,itog_cena_za_dost,tov_check_na_dost_id,kureer_dost_id) 
+values (  @pizza_v_dost_id,@kol_vo_za_poz_v_dost,@itog_cena_za_dost,@tov_check_na_dost_id,@kureer_dost_id)
+go
+
+create procedure [dbo].[zakaz_na_dost_add]
+@napitok_na_dost_id int ,
+@eda_na_dost_id int,
+@pizza_na_dost_id int,
+@kol_vo_za_poz_na_dost int,
+@itog_cena_za_dost int,
+@tov_check_na_dost_id int,
+@kureer_dost_id int
+as insert into [dbo].[zakaz_na_dost]
+(napitok_v_dost_id,pizza_v_dost_id,eda_v_dost_id,kol_vo_za_poz_v_dost,itog_cena_za_dost,tov_check_na_dost_id,kureer_dost_id) 
+values ( @napitok_na_dost_id, @pizza_na_dost_id, @eda_na_dost_id, @kol_vo_za_poz_na_dost, @itog_cena_za_dost,@tov_check_na_dost_id,@kureer_dost_id)
+go
+
+create view [dbo].[eda_ingr_view]
+as SELECT        dbo.eda.Naim_blud AS [Название блюда], dbo.sklad_s_ingrid.Nazv_ingr AS Ингридиент
+FROM            dbo.eda INNER JOIN
+                         dbo.Eda_ingr ON dbo.eda.id_eda = dbo.Eda_ingr.eda_Ingr_id INNER JOIN
+                         dbo.sklad_s_ingrid ON dbo.sklad_s_ingrid.id_ingr = dbo.Eda_ingr.ingr_eda_id
+go
+
+create view [dbo].[pizza_ingr_view]
+as SELECT        dbo.pizza.Nazv_pizza AS [Название пиццы], dbo.sklad_s_ingrid.Nazv_ingr AS Ингридиент
+FROM            dbo.pizza INNER JOIN
+                         dbo.pizza_ingr ON dbo.pizza.id_pizza = dbo.pizza_ingr.pizza_Ingr_id INNER JOIN
+                         dbo.sklad_s_ingrid ON dbo.sklad_s_ingrid.id_ingr = dbo.pizza_ingr.ingr_pizza_id
+go
+
+create view [dbo].[sotr_rekv_view]
+as SELECT        CONCAT(dbo.sotrudnik.Fam_Sotr, ' ', dbo.sotrudnik.Im_Sotr, ' ', dbo.sotrudnik.Otch_Sotr)  AS [ФИО сотрудника], dbo.Dolj.nazv_dolj AS [Занимаемая должность], dbo.rekvizit.Nazv_rekvizita AS Реквезит
+FROM            dbo.sotrudnik INNER JOIN
+                         dbo.Dolj ON dbo.sotrudnik.dolj_id = dbo.Dolj.id_dolj INNER JOIN
+                         dbo.Sotr_Rekv ON dbo.Sotr_Rekv.sotr_v_rekv_id = dbo.sotrudnik.id_sotr INNER JOIN
+                         dbo.rekvizit ON dbo.Sotr_Rekv.rekvizit_id = dbo.rekvizit.id_rekvizit
+go
+
+create view [sotrudnik_view]
+as SELECT        CONCAT(dbo.sotrudnik.Fam_Sotr, ' ', dbo.sotrudnik.Im_Sotr, ' ', dbo.sotrudnik.Otch_Sotr) AS [ФИО сотрудника], dbo.sotrudnik.Password AS [Пароль сотрудника], dbo.sotrudnik.System_access AS [Доступ к программе], 
+                         dbo.Dolj.nazv_dolj AS [Занимаемая должность]
+FROM            dbo.sotrudnik INNER JOIN
+                         dbo.Dolj ON dbo.sotrudnik.dolj_id = dbo.Dolj.id_dolj
+go
+
+CREATE TRIGGER [DBO].[delete_Dolj] on [dbo].[Dolj] 
+for delete
+as 
+declare @ID_Dolj int
+select @ID_Dolj = deleted.id_Dolj from Dolj, deleted if (select count (id_Dolj) from Dolj)<1 
+begin rollback tran 
+raiserror('Нельзя удалить все данные',16,10) 
+end
+GO
+
+CREATE TRIGGER [DBO].[delete_Dost_v_prog] on [dbo].[Dost_v_prog] 
+for delete
+as 
+declare @ID_Dostup int
+select @ID_Dostup = deleted.id_dostup from Dost_v_prog, deleted if (select count (id_Dostup) from Dost_v_prog)<1 
+begin rollback tran 
+raiserror('Нельзя удалить все данные',16,10) 
+end
+GO
+
+CREATE TRIGGER [DBO].[delete_eda] on [dbo].[eda] 
+for delete
+as 
+declare @ID_eda int
+select @ID_eda = deleted.id_eda from eda, deleted if (select count (id_eda) from eda)<1 
+begin rollback tran 
+raiserror('Нельзя удалить все данные',16,10) 
+end
+GO
+
+CREATE TRIGGER [DBO].[delete_eda_ingr] on [dbo].[eda_ingr] 
+for delete
+as 
+declare @ID_EdaIngr int
+select @ID_EdaIngr = deleted.id_EdaIngr from Eda_ingr, deleted if (select count (id_EdaIngr) from Eda_ingr)<1 
+begin rollback tran 
+raiserror('Нельзя удалить все данные',16,10) 
+end
+GO
+
+CREATE TRIGGER [DBO].[delete_klient] on [dbo].[Klient] 
+for delete
+as 
+declare @ID_Klient int
+select @ID_Klient = deleted.id_klient from klient, deleted if (select count (id_klient) from klient)<1 
+begin rollback tran 
+raiserror('Нельзя удалить все данные',16,10) 
+end
+GO
+
+CREATE TRIGGER [DBO].[delete_napitok] on [dbo].[napitok] 
+for delete
+as 
+declare @ID_napitok int
+select @ID_napitok = deleted.id_napitok from napitok, deleted if (select count (id_napitok) from napitok)<1 
+begin rollback tran 
+raiserror('Нельзя удалить все данные',16,10) 
+end
+GO
+
+CREATE TRIGGER [DBO].[delete_obem_napitka] on [dbo].[obem_napitka] 
+for delete
+as 
+declare @ID_obem int
+select @ID_obem = deleted.id_obem from obem_napitka, deleted if (select count (id_obem) from obem_napitka)<1 
+begin rollback tran 
+raiserror('Нельзя удалить все данные',16,10) 
+end
+GO
+
+CREATE TRIGGER [DBO].[delete_pizza] on [dbo].[pizza] 
+for delete
+as 
+declare @ID_pizza int
+select @ID_pizza = deleted.id_pizza from pizza, deleted if (select count (id_pizza) from pizza)<1 
+begin rollback tran 
+raiserror('Нельзя удалить все данные',16,10) 
+end
+GO
+
+CREATE TRIGGER [DBO].[delete_pizza_ingr] on [dbo].[pizza_ingr] 
+for delete
+as 
+declare @ID_PizzaIngr int
+select @ID_PizzaIngr = deleted.id_PizzaIngr from pizza_ingr, deleted if (select count (id_PizzaIngr) from pizza_ingr)<1 
+begin rollback tran 
+raiserror('Нельзя удалить все данные',16,10) 
+end
+GO
+
+CREATE TRIGGER [DBO].[delete_Razm_pizza] on [dbo].[razm_pizza] 
+for delete
+as 
+declare @ID_razm_pizza int
+select @ID_razm_pizza = deleted.id_razm from Razm_pizza, deleted if (select count (id_razm) from Razm_pizza)<1 
+begin rollback tran 
+raiserror('Нельзя удалить все данные',16,10) 
+end
+GO
+
+CREATE TRIGGER [DBO].[delete_rekvezit] on [dbo].[rekvizit] 
+for delete
+as 
+declare @ID_rekvezit int
+select @ID_rekvezit = deleted.id_rekvizit from [dbo].[rekvizit] deleted if (select count (id_rekvizit) from rekvizit)<1 
+begin rollback tran 
+raiserror('Нельзя удалить все данные',16,10) 
+end
+GO
+
+CREATE TRIGGER [DBO].[delete_sklad_s_ingrid] on [dbo].[sklad_s_ingrid] 
+for delete
+as 
+declare @ID_ingr int
+select @ID_ingr = deleted.id_ingr from sklad_s_ingrid, deleted if (select count (@ID_ingr) from sklad_s_ingrid)<1 
+begin rollback tran 
+raiserror('Нельзя удалить все данные',16,10) 
+end
+GO
+
+CREATE TRIGGER [DBO].[delete_Sotr_Rekv] on [dbo].[Sotr_Rekv] 
+for delete
+as 
+declare @ID_SotrRekv int
+select @ID_SotrRekv = deleted.id_SotrRekv from Sotr_Rekv, deleted if (select count (id_SotrRekv) from Sotr_Rekv)<1 
+begin rollback tran 
+raiserror('Нельзя удалить все данные',16,10) 
+end
+GO
+
+CREATE TRIGGER [DBO].[delete_sotrudnik] on [dbo].[sotrudnik] 
+for delete
+as 
+declare @ID_sotr int
+select @ID_sotr = deleted.id_sotr from sotrudnik, deleted if (select count (id_sotr) from sotrudnik)<1 
+begin rollback tran 
+raiserror('Нельзя удалить все данные',16,10) 
+end
+GO
+
+CREATE TRIGGER [DBO].[delete_Tov_check_za_dost] on [dbo].[Tov_Check_za_Dost] 
+for delete
+as 
+declare @ID_Tov_Check_za_Dost int
+select @ID_Tov_Check_za_dost = deleted.id_tov_check_za_dost from tov_check_za_dost, deleted if (select count (id_tov_check_za_dost) from tov_check_za_dost)<1 
+begin rollback tran 
+raiserror('Нельзя удалить все данные',16,10) 
+end
+GO
+
+CREATE TRIGGER [DBO].[delete_Tov_check_za_zakaz] on [dbo].[Tov_Check_za_zakaz] 
+for delete
+as 
+declare @ID_Tov_Check_v_zale int
+select @ID_Tov_Check_v_zale = deleted.id_tov_check_v_zale from tov_check_za_zakaz, deleted if (select count (id_tov_check_v_zale) from tov_check_za_zakaz)<1 
+begin rollback tran 
+raiserror('Нельзя удалить все данные',16,10) 
+end
+GO
+
+CREATE TRIGGER [DBO].[delete_Uch_Knig] on [dbo].[Uch_Knig] 
+for delete
+as 
+declare @ID_uchet_knig int
+select @ID_uchet_knig = deleted.id_uchet_knig from Uch_knig deleted if (select count (id_uchet_knig) from Uch_knig)<1 
+begin rollback tran 
+raiserror('Нельзя удалить все данные',16,10) 
+end
+GO
+
+CREATE TRIGGER [DBO].[delete_zakaz] on [dbo].[zakaz_v_zale] 
+for delete
+as 
+declare @ID_zakaz int
+select @ID_zakaz = deleted.id_zakaz_v_zale from zakaz_v_zale, deleted if (select count (id_zakaz_v_zale) from zakaz_v_zale)<1 
+begin rollback tran 
+raiserror('Нельзя удалить все данные',16,10) 
+end
+GO

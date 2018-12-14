@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
 using System.Data.Sql;
+using System.Windows.Forms;
 
 namespace Pizzeria
 {
@@ -95,13 +96,13 @@ namespace Pizzeria
             _PB.Connection.Close();
         }
 
-        public void zakaz_v_zale_form_pizza_add(int pizza_v_zale_id, int kol_v_za_poz_zale, int itog_cena_v_zale, int tov_check_v_zale_id)
+        public void zakaz_v_zale_form_pizza_add(int pizza_na_zale_id, int kol_v_za_poz_zale, int itog_cena_v_zale, int tov_check_v_zale_id)
         {
             _PB.Set_Connection();
             _PB.Connection.Open();
             SqlCommand zakaz_v_zale_add = new SqlCommand("zakaz_v_zale_pizza_add", _PB.Connection);
             zakaz_v_zale_add.CommandType = CommandType.StoredProcedure;
-            zakaz_v_zale_add.Parameters.AddWithValue("@pizza_v_zale_id", pizza_v_zale_id);
+            zakaz_v_zale_add.Parameters.AddWithValue("@pizza_v_zale_id", pizza_na_zale_id);
             zakaz_v_zale_add.Parameters.AddWithValue("@Kol_vo_za_poz_v_zale", kol_v_za_poz_zale);
             zakaz_v_zale_add.Parameters.AddWithValue("@itog_cena_v_zale", itog_cena_v_zale);
             zakaz_v_zale_add.Parameters.AddWithValue("@tov_check_v_zale_id", tov_check_v_zale_id);
@@ -109,17 +110,44 @@ namespace Pizzeria
             _PB.Connection.Close();
         }
 
-        public void zakaz_na_dost_form_add(int napiitok_na_dost_id, int eda_na_dost_id, int pizza_na_dost_id, int kol_v_za_poz_na_dost, int itog_cena_za_dost)
+        public void zakaz_na_dost_form_pizza_add(int pizza_v_dost_id, int kol_v_za_poz_na_dost, int itog_cena_za_dost,int tov_check_za_dost_id)
         {
             _PB.Set_Connection();
             _PB.Connection.Open();
-            SqlCommand zakaz_na_dost_add = new SqlCommand("zakaz_na_dost_add", _PB.Connection);
+            SqlCommand zakaz_na_dost_add = new SqlCommand("zakaz_na_dost_pizza_add", _PB.Connection);
             zakaz_na_dost_add.CommandType = CommandType.StoredProcedure;
-            zakaz_na_dost_add.Parameters.AddWithValue("@napitok_na_dost_id", napiitok_na_dost_id);
-            zakaz_na_dost_add.Parameters.AddWithValue("@eda_na_dost_id", eda_na_dost_id);
-            zakaz_na_dost_add.Parameters.AddWithValue("@pizza_na_dost_id", pizza_na_dost_id);
-            zakaz_na_dost_add.Parameters.AddWithValue("@kol_v_za_poz_na_dost", kol_v_za_poz_na_dost);
+            zakaz_na_dost_add.Parameters.AddWithValue("@pizza_v_dost_id", pizza_v_dost_id);
+            zakaz_na_dost_add.Parameters.AddWithValue("@kol_vo_za_poz_v_dost", kol_v_za_poz_na_dost);
             zakaz_na_dost_add.Parameters.AddWithValue("@itog_cena_za_dost", itog_cena_za_dost);
+            zakaz_na_dost_add.Parameters.AddWithValue("@tov_check_na_dost_id", tov_check_za_dost_id);
+            zakaz_na_dost_add.ExecuteNonQuery();
+            _PB.Connection.Close();
+        }
+
+        public void zakaz_na_dost_form_napitok_add(int napitok_v_dost_id, int kol_v_za_poz_na_dost, int itog_cena_za_dost,int tov_check_za_dost_id)
+        {
+            _PB.Set_Connection();
+            _PB.Connection.Open();
+            SqlCommand zakaz_na_dost_add = new SqlCommand("zakaz_na_dost_napitok_add", _PB.Connection);
+            zakaz_na_dost_add.CommandType = CommandType.StoredProcedure;
+            zakaz_na_dost_add.Parameters.AddWithValue("@napitok_v_dost_id", napitok_v_dost_id);
+            zakaz_na_dost_add.Parameters.AddWithValue("@kol_vo_za_poz_v_dost", kol_v_za_poz_na_dost);
+            zakaz_na_dost_add.Parameters.AddWithValue("@itog_cena_za_dost", itog_cena_za_dost);
+            zakaz_na_dost_add.Parameters.AddWithValue("@tov_check_na_dost_id", tov_check_za_dost_id);
+            zakaz_na_dost_add.ExecuteNonQuery();
+            _PB.Connection.Close();
+        }
+
+        public void zakaz_na_dost_form_eda_add(int eda_v_dost_id, int kol_v_za_poz_na_dost, int itog_cena_za_dost, int tov_check_za_dost_id)
+        {
+            _PB.Set_Connection();
+            _PB.Connection.Open();
+            SqlCommand zakaz_na_dost_add = new SqlCommand("zakaz_na_dost_eda_add", _PB.Connection);
+            zakaz_na_dost_add.CommandType = CommandType.StoredProcedure;
+            zakaz_na_dost_add.Parameters.AddWithValue("@eda_v_dost_id", eda_v_dost_id);
+            zakaz_na_dost_add.Parameters.AddWithValue("@kol_vo_za_poz_v_dost", kol_v_za_poz_na_dost);
+            zakaz_na_dost_add.Parameters.AddWithValue("@itog_cena_za_dost", itog_cena_za_dost);
+            zakaz_na_dost_add.Parameters.AddWithValue("@tov_check_na_dost_id", tov_check_za_dost_id);
             zakaz_na_dost_add.ExecuteNonQuery();
             _PB.Connection.Close();
         }
@@ -136,16 +164,39 @@ namespace Pizzeria
             _PB.Connection.Close();
         }
 
-        public void tov_check_zakaz_na_dost_add(int sotr_v_dost_id, int klient_id, DateTime vrem_zakaz_na_dost)
+        public void tov_check_zakaz_na_dost_add(int sotr_v_dost_id, int klient_id,int kureer_id, DateTime vrem_zakaz_na_dost)
+        {
+                _PB.Set_Connection();
+                _PB.Connection.Open();
+                SqlCommand tov_check_zakaz_na_dost_add = new SqlCommand("tov_check_za_dost_add", _PB.Connection);
+                tov_check_zakaz_na_dost_add.CommandType = CommandType.StoredProcedure;
+                tov_check_zakaz_na_dost_add.Parameters.AddWithValue("@sotr_v_dost_id", sotr_v_dost_id);
+                tov_check_zakaz_na_dost_add.Parameters.AddWithValue("@kureer_id", kureer_id);
+                tov_check_zakaz_na_dost_add.Parameters.AddWithValue("@klient_id", klient_id);
+                tov_check_zakaz_na_dost_add.Parameters.AddWithValue("@vrem_zakaz_na_dost", vrem_zakaz_na_dost);
+                tov_check_zakaz_na_dost_add.ExecuteNonQuery();
+                _PB.Connection.Close();
+        }
+
+        public void zakaz_na_dost_delete(int id_zakaz_na_dost)
         {
             _PB.Set_Connection();
             _PB.Connection.Open();
-            SqlCommand tov_check_zakaz_na_dost_add = new SqlCommand("tov_check_za_dost_add", _PB.Connection);
-            tov_check_zakaz_na_dost_add.CommandType = CommandType.StoredProcedure;
-            tov_check_zakaz_na_dost_add.Parameters.AddWithValue("@sotr_v_dost_id", sotr_v_dost_id);
-            tov_check_zakaz_na_dost_add.Parameters.AddWithValue("@klient_id", klient_id);
-            tov_check_zakaz_na_dost_add.Parameters.AddWithValue("@vrem_zakaz_na_dost", vrem_zakaz_na_dost);
-            tov_check_zakaz_na_dost_add.ExecuteNonQuery();
+            SqlCommand zakaz_na_dost_delete = new SqlCommand("tov_check_za_dost_delete", _PB.Connection);
+            zakaz_na_dost_delete.CommandType = CommandType.StoredProcedure;
+            zakaz_na_dost_delete.Parameters.AddWithValue("@id_zakaz_na_dost", id_zakaz_na_dost);
+            zakaz_na_dost_delete.ExecuteNonQuery();
+            _PB.Connection.Close();
+        }
+
+        public void zakaz_v_zale_delete(int id_zakaz_v_zale)
+        {
+            _PB.Set_Connection();
+            _PB.Connection.Open();
+            SqlCommand zakaz_v_zale_delete = new SqlCommand("tov_check_v_zale_delete", _PB.Connection);
+            zakaz_v_zale_delete.CommandType = CommandType.StoredProcedure;
+            zakaz_v_zale_delete.Parameters.AddWithValue("@id_zakaz_v_zale", id_zakaz_v_zale);
+            zakaz_v_zale_delete.ExecuteNonQuery();
             _PB.Connection.Close();
         }
         public void sotrudniki_add(string Fam_Sotr, string Im_Sotr, string Otch_Sotr, string Pass_Sotr, int syst_access, int kol_vo_rekvizit, int dolj, int admin_access)

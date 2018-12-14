@@ -64,7 +64,7 @@ namespace Pizzeria
 
         private void button4_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Close();
             Main_Menu Form = new Main_Menu();
             Form.Show();
         }

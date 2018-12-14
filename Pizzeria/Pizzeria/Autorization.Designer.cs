@@ -39,7 +39,9 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.label1.Location = new System.Drawing.Point(266, 110);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(230, 29);
@@ -48,6 +50,8 @@
             // 
             // textBox1
             // 
+            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.textBox1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.textBox1.Location = new System.Drawing.Point(271, 163);
             this.textBox1.Name = "textBox1";
             this.textBox1.PasswordChar = '*';
@@ -56,24 +60,28 @@
             // 
             // button1
             // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.button1.Location = new System.Drawing.Point(271, 221);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(225, 98);
             this.button1.TabIndex = 2;
             this.button1.Text = "ВОЙТИ";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
+            this.checkBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.checkBox1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.checkBox1.Location = new System.Drawing.Point(579, 264);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(114, 17);
             this.checkBox1.TabIndex = 3;
             this.checkBox1.Text = "Показать пароль";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.UseVisualStyleBackColor = false;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // timer1
@@ -85,6 +93,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.button1);

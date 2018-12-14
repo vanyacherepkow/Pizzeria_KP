@@ -77,49 +77,49 @@ namespace Pizzeria
 
         private void button2_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Close();
             Dostavka Form = new Dostavka();
             Form.Show();
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Close();
             Eda Form = new Eda();
             Form.Show();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Close();
             Klients Form = new Klients();
             Form.Show();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Close();
             Sotrudniki Form = new Sotrudniki();
             Form.Show();
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Close();
             Rekvizit Form = new Rekvizit();
             Form.Show();
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Close();
             Ingridients Form = new Ingridients();
             Form.Show();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Close();
             Zal Form = new Zal();
             Form.Show();
         }

@@ -60,7 +60,10 @@ namespace Pizzeria
 
         public void Set_Connection()
         {
-            Connection.ConnectionString = "Data Source=" + DS + ";Initial Catalog=" + IC + ";Persist Security Info=True; User ID=" + UN + ";Password=\"" + UP + "\"";
+            Connection.ConnectionString = "Data Source=" + DS + ";" +
+                "Initial Catalog=" + IC + ";" +
+                "Persist Security Info=True; " +
+                "User ID=" + UN + ";Password=\"" + UP + "\"";
         }
         public void Connection_State()
         {

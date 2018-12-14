@@ -53,12 +53,14 @@
             // 
             // button1
             // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.button1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.button1.Location = new System.Drawing.Point(713, 415);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 0;
             this.button1.Text = "Вернуться";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // groupBox2
@@ -74,6 +76,7 @@
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.listBox1);
             this.groupBox2.Controls.Add(this.dataGridView1);
+            this.groupBox2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.groupBox2.Location = new System.Drawing.Point(12, 37);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(776, 372);
@@ -84,28 +87,33 @@
             // 
             // button5
             // 
+            this.button5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.button5.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.button5.Location = new System.Drawing.Point(619, 333);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(124, 23);
             this.button5.TabIndex = 20;
             this.button5.Text = "Завершить заказ";
-            this.button5.UseVisualStyleBackColor = true;
+            this.button5.UseVisualStyleBackColor = false;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button4
             // 
+            this.button4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.button4.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.button4.Location = new System.Drawing.Point(509, 40);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 19;
             this.button4.Text = "Удалить позицию";
-            this.button4.UseVisualStyleBackColor = true;
+            this.button4.UseVisualStyleBackColor = false;
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.radioButton3);
             this.groupBox1.Controls.Add(this.radioButton2);
             this.groupBox1.Controls.Add(this.radioButton1);
+            this.groupBox1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.groupBox1.Location = new System.Drawing.Point(363, 40);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(121, 147);
@@ -116,6 +124,7 @@
             // radioButton3
             // 
             this.radioButton3.AutoSize = true;
+            this.radioButton3.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.radioButton3.Location = new System.Drawing.Point(23, 105);
             this.radioButton3.Name = "radioButton3";
             this.radioButton3.Size = new System.Drawing.Size(44, 17);
@@ -128,6 +137,7 @@
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
+            this.radioButton2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.radioButton2.Location = new System.Drawing.Point(23, 62);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(68, 17);
@@ -140,6 +150,7 @@
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
+            this.radioButton1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.radioButton1.Location = new System.Drawing.Point(23, 20);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(57, 17);
@@ -151,12 +162,13 @@
             // 
             // button2
             // 
+            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.button2.Location = new System.Drawing.Point(6, 333);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(123, 23);
             this.button2.TabIndex = 17;
             this.button2.Text = "Добавить в заказ";
-            this.button2.UseVisualStyleBackColor = true;
+            this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label3
@@ -170,6 +182,8 @@
             // 
             // numericUpDown1
             // 
+            this.numericUpDown1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.numericUpDown1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.numericUpDown1.Location = new System.Drawing.Point(6, 298);
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
@@ -186,6 +200,8 @@
             // 
             // textBox1
             // 
+            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.textBox1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.textBox1.Location = new System.Drawing.Point(10, 209);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(123, 20);
@@ -201,6 +217,8 @@
             // 
             // listBox1
             // 
+            this.listBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.listBox1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.listBox1.FormattingEnabled = true;
             this.listBox1.Location = new System.Drawing.Point(619, 40);
             this.listBox1.Name = "listBox1";
@@ -219,18 +237,21 @@
             // 
             // button3
             // 
+            this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.button3.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.button3.Location = new System.Drawing.Point(320, 8);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(159, 23);
             this.button3.TabIndex = 11;
             this.button3.Text = "Начать новый заказ";
-            this.button3.UseVisualStyleBackColor = true;
+            this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // Zal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.groupBox2);

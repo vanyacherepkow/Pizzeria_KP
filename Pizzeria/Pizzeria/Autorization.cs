@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.Sql;
 using System.Data.SqlClient;
+using Crypt;
 
 namespace Pizzeria
 {
@@ -31,6 +32,7 @@ namespace Pizzeria
         public string Ingridients_access = "select [dbo].[Dost_V_Prog].[ingridients] from [dbo].[Dost_V_Prog] inner join [dbo].[Dolj]on [dbo].[Dost_v_prog].[id_dostup]=[dbo].[Dolj].[dostup_id] inner join [dbo].[Sotrudnik] on [dbo].[Sotrudnik].[Dolj_id]=[dbo].[Dolj].[ID_Dolj] where [Sotrudnik].[id_Sotr]=";
         private Podkl_Bazi _PB;
         private SqlCommand _ComandaSQL;
+        public Crypt_Class Crpt = new Crypt_Class();
 
         public void Vhod(string password_BD)
         {
@@ -93,7 +95,7 @@ namespace Pizzeria
                     break;//Проверка на пустое поле ввода пароля и отсутствие данных в реестре
                 case (false):
                     {
-                        Vhod(textBox1.Text);
+                        Vhod(Crpt.code_text(textBox1.Text));
 
                         switch (Program.ProgAccess)
                         {
@@ -103,7 +105,7 @@ namespace Pizzeria
                             case (1):
                                 {
 
-                                    this.Hide();
+                                    this.Close();
                                     Main_Menu Form = new Main_Menu();
                                     Form.Show();
                                     

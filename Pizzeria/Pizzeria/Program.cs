@@ -43,8 +43,18 @@ namespace Pizzeria
         public static DataTable VivodRekvizit;
         public static DataTable VivodSotrRekv;
         public static DataTable VivodSotrobj;
-        public static int Num_Check;
+        public static DataTable VivodKliDost;
+        public static DataTable VivodKurDost;
+        public static int Num_Check_v_zale;
         public static int CenaVZale;
+        public static int Num_Check_za_dost;
+        public static int CenaZaDost;
+        public static DataTable VivodNapVZaleLB;
+        public static DataTable VivodEdaVZaleLB;
+        public static DataTable VivodPizzaVZaleLB;
+        public static DataTable VivodNapNADostLB;
+        public static DataTable VivodEdaNADostLB;
+        public static DataTable VivodPizzaNADostLB;
 
     }
 }

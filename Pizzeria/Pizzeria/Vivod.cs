@@ -124,7 +124,7 @@ namespace Pizzeria
         {
             _PB.Set_Connection();
             _PB.Connection.Open();
-            SqlCommand sotrobj = new SqlCommand("Select Fam_Sotr as 'Фамииля сотрудника', Im_Sotr as 'Имя сотрудника', Otch_Sotr as 'Отчество сотрудника', nazv_Dolj as 'Занимаемая должность', password as 'Пароль сотрудника', System_access as 'Доступ к системе', Admin_access as 'Доступ администратора', [dbo].[dost_v_prog].[sotrudniki] as 'Доступ к сотрудникам', " +
+            SqlCommand sotrobj = new SqlCommand("Select ID_Sotr,Fam_Sotr as 'Фамииля сотрудника', Im_Sotr as 'Имя сотрудника', Otch_Sotr as 'Отчество сотрудника', nazv_Dolj as 'Занимаемая должность', password as 'Пароль сотрудника', System_access as 'Доступ к системе', Admin_access as 'Доступ администратора', [dbo].[dost_v_prog].[sotrudniki] as 'Доступ к сотрудникам', " +
                 "[dbo].[dost_v_prog].[Klients] as 'Доступ к клиентам', [dbo].[dost_v_prog].[zakaz_v_zale] as 'Досутп к заказу в зале', [dbo].[dost_v_prog].[zakaz_na_dost] as 'Досутп к заказе на доставку',  [dbo].[dost_v_prog].[ingridients] as 'Доступ к ингридиентам',  [dbo].[dost_v_prog].[eda] as 'Доступ к еде',  [dbo].[dost_v_prog].[rekvizit] as 'Досутп к реквизиту' from  " +
                 "[dbo].[sotrudnik] inner join [dbo].[dolj] on [dbo].[sotrudnik].[dolj_id]=[dbo].[dolj].[id_dolj] inner join [dbo].[dost_v_prog] on  [dbo].[dost_v_prog].[id_dostup]=[dbo].[dolj].[dostup_id] ", _PB.Connection);
             SqlDataReader TableReader = sotrobj.ExecuteReader();
@@ -133,14 +133,115 @@ namespace Pizzeria
             Program.VivodSotrobj = Table;
             _PB.Connection.Close();
         }
-        public void NumCheck()
+        public void NumCheckVZale()
         {
             _PB.Set_Connection();
             _PB.Connection.Open();
             SqlCommand NumberCheck = new SqlCommand("select top 1 * from [tov_check_za_zakaz] order by id_tov_check_v_zale desc", _PB.Connection);
-            Program.Num_Check = Convert.ToInt32(NumberCheck.ExecuteScalar().ToString());
+            Program.Num_Check_v_zale = Convert.ToInt32(NumberCheck.ExecuteScalar().ToString());
             _PB.Connection.Close();
         }
 
+        public void NumCheckZaDost()
+        {
+            _PB.Set_Connection();
+            _PB.Connection.Open();
+            SqlCommand NumberCheck = new SqlCommand("select top 1 * from [tov_check_za_dost] order by id_tov_check_za_dost desc", _PB.Connection);
+            Program.Num_Check_za_dost = Convert.ToInt32(NumberCheck.ExecuteScalar().ToString());
+            _PB.Connection.Close();
+        }
+
+
+        public void vivod_klient_dost()
+        {
+            _PB.Set_Connection();
+            _PB.Connection.Open();
+            SqlCommand KliDost = new SqlCommand("Select id_Klient,concat(Fam_Klient,' ',Im_Klient,' ',Otch_Klient) as 'Клиент', Tel_Klient as 'Телефон клиента', Adres_Klient as 'Адрес клиента' from [dbo].[Klient]", _PB.Connection);
+            SqlDataReader TableReader = KliDost.ExecuteReader();
+            DataTable Table = new DataTable();
+            Table.Load(TableReader);
+            Program.VivodKliDost = Table;
+            _PB.Connection.Close();
+        }
+        public void vivod_kurer_dost()
+        {
+            _PB.Set_Connection();
+            _PB.Connection.Open();
+            SqlCommand KurDost = new SqlCommand("Select id_sotr,concat(Fam_Sotr,' ',Im_Sotr,' ',Otch_Sotr) as 'Курьер'  from [dbo].[sotrudnik] inner join [dbo].[Dolj] on [dbo].[sotrudnik].[dolj_id]=[dbo].[Dolj].[id_dolj] where [dbo].[Dolj].[nazv_dolj]='Курьер' ", _PB.Connection);
+            SqlDataReader TableReader = KurDost.ExecuteReader();
+            //MessageBox.Show(TableReader.ToString());
+            DataTable Table = new DataTable();
+            Table.Load(TableReader);
+            Program.VivodKurDost = Table;
+            //MessageBox.Show(Program.Viv)
+            _PB.Connection.Close();
+            
+        }
+        public void Napitok_dost_lb()
+        {
+            _PB.Set_Connection();
+            _PB.Connection.Open();
+            SqlCommand List_Nap = new SqlCommand("select top 1 nazv_napitka from zakaz_na_dost inner join tov_check_za_dost  on tov_check_na_dost_id=id_tov_check_za_dost inner join napitok on id_napitok=napitok_v_dost_id  order by id_zakaz_na_dost desc", _PB.Connection);
+            SqlDataReader TableReader = List_Nap.ExecuteReader();
+            DataTable Table = new DataTable();
+            Table.Load(TableReader);
+            Program.VivodNapNADostLB = Table;
+            _PB.Connection.Close();
+        }
+        public void Pizza_dost_lb()
+        {
+            _PB.Set_Connection();
+            _PB.Connection.Open();
+            SqlCommand List_Nap = new SqlCommand("select top 1 Nazv_pizza from zakaz_na_dost inner join tov_check_za_dost  on tov_check_na_dost_id=id_tov_check_za_dost inner join pizza on id_pizza=pizza_v_dost_id  order by id_zakaz_na_dost desc ", _PB.Connection);
+            SqlDataReader TableReader = List_Nap.ExecuteReader();
+            DataTable Table = new DataTable();
+            Table.Load(TableReader);
+            Program.VivodPizzaNADostLB = Table;
+            _PB.Connection.Close();
+        }
+        public void Eda_dost_lb()
+        {
+            _PB.Set_Connection();
+            _PB.Connection.Open();
+            SqlCommand List_Nap = new SqlCommand("select top 1 naim_blud from zakaz_na_dost inner join tov_check_za_dost  on tov_check_na_dost_id=id_tov_check_za_dost inner join eda on id_eda=eda_v_dost_id  order by id_zakaz_na_dost desc", _PB.Connection);
+            SqlDataReader TableReader = List_Nap.ExecuteReader();
+            DataTable Table = new DataTable();
+            Table.Load(TableReader);
+            Program.VivodEdaNADostLB = Table;
+            _PB.Connection.Close();
+        }
+        public void Napitok_zal_lb()
+        {
+            _PB.Set_Connection();
+            _PB.Connection.Open();
+            SqlCommand List_Nap_zal = new SqlCommand("select top 1 concat(kol_vo_za_poz_v_zale,' ', Nazv_napitka,' ',itog_cena_v_zale) from zakaz_v_zale inner join tov_check_za_zakaz  on tov_check_v_zale_id=id_tov_check_v_zale inner join napitok on id_napitok=napitok_v_zale_id  order by id_zakaz_v_zale desc", _PB.Connection);
+            SqlDataReader TableReader = List_Nap_zal.ExecuteReader();
+            DataTable Table = new DataTable();
+            Table.Load(TableReader);
+            Program.VivodNapVZaleLB = Table;
+            _PB.Connection.Close();
+        }
+        public void Pizza_zal_lb()
+        {
+            _PB.Set_Connection();
+            _PB.Connection.Open();
+            SqlCommand List_Pizza_zal = new SqlCommand("select top 1 concat(kol_vo_za_poz_v_zale,' ', Nazv_pizza,' ',itog_cena_v_zale) from zakaz_v_zale inner join tov_check_za_zakaz  on tov_check_v_zale_id=id_tov_check_v_zale inner join pizza on id_pizza=pizza_v_zale_id  order by id_zakaz_v_zale desc", _PB.Connection);
+            SqlDataReader TableReader = List_Pizza_zal.ExecuteReader();
+            DataTable Table = new DataTable();
+            Table.Load(TableReader);
+            Program.VivodPizzaVZaleLB = Table;
+            _PB.Connection.Close();
+        }
+        public void Eda_zal_lb()
+        {
+            _PB.Set_Connection();
+            _PB.Connection.Open();
+            SqlCommand List_Eda_zal = new SqlCommand("select top 1 concat(kol_vo_za_poz_v_zale,' ', Naim_blud,' ',itog_cena_v_zale) from zakaz_v_zale inner join tov_check_za_zakaz  on tov_check_v_zale_id=id_tov_check_v_zale inner join eda on id_eda=eda_v_zale_id  order by id_zakaz_v_zale desc", _PB.Connection);
+            SqlDataReader TableReader = List_Eda_zal.ExecuteReader();
+            DataTable Table = new DataTable();
+            Table.Load(TableReader);
+            Program.VivodEdaVZaleLB = Table;
+            _PB.Connection.Close();
+        }
     }
 }
